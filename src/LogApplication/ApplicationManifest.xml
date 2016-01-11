@@ -1,14 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="LogApplicationType" ApplicationTypeVersion="1.1.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-   <Parameters />
+   <Parameters>
+      <Parameter Name="LogStore_MinReplicaSetSize" DefaultValue="2" />
+      <Parameter Name="LogStore_PartitionCount" DefaultValue="1" />
+      <Parameter Name="LogStore_TargetReplicaSetSize" DefaultValue="3" />
+      <Parameter Name="LogGateway_InstanceCount" DefaultValue="1" />
+   </Parameters>
    <ServiceManifestImport>
       <ServiceManifestRef ServiceManifestName="LogServiceGatewayPkg" ServiceManifestVersion="1.1.0" />
    </ServiceManifestImport>
+   <ServiceManifestImport>
+      <ServiceManifestRef ServiceManifestName="LogServiceStorePkg" ServiceManifestVersion="1.1.0" />
+      <ConfigOverrides />
+   </ServiceManifestImport>
    <DefaultServices>
       <Service Name="LogGateway">
-         <StatelessService ServiceTypeName="LogGatewayServiceType">
+         <StatelessService ServiceTypeName="LogGatewayServiceType" InstanceCount="[LogGateway_InstanceCount]">
             <SingletonPartition />
          </StatelessService>
+      </Service>
+      <Service Name="LogStore">
+         <StatefulService ServiceTypeName="LogStoreServiceType" TargetReplicaSetSize="[LogStore_TargetReplicaSetSize]" MinReplicaSetSize="[LogStore_MinReplicaSetSize]">
+            <UniformInt64Partition PartitionCount="[LogStore_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+         </StatefulService>
       </Service>
    </DefaultServices>
 </ApplicationManifest>
