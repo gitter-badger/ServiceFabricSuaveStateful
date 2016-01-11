@@ -1,0 +1,3 @@
+build_script:
+  - cmd: build.cmd RunUnitTest
+test: off
