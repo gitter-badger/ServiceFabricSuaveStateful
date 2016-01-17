@@ -1,5 +1,7 @@
 # Minimal Suave Host for Azure Service Fabric
 
+[![Join the chat at https://gitter.im/deepcovelabs/ServiceFabricSuaveStateful](https://badges.gitter.im/deepcovelabs/ServiceFabricSuaveStateful.svg)](https://gitter.im/deepcovelabs/ServiceFabricSuaveStateful?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build status](https://ci.appveyor.com/api/projects/status/vtgo8pk4gf49ec4f/branch/master?svg=true)](https://ci.appveyor.com/project/Krzysztof-Cieslak/servicefabricsuave/branch/master)
 
 Based ok https://github.com/isaacabraham/ServiceFabricFsDemo.
